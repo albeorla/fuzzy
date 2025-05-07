@@ -151,3 +151,5 @@ node_modules/
 # Task files
 tasks.json
 tasks/
+scripts/prd.txt
+scripts/example_prd.txt
