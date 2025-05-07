@@ -1,0 +1,36 @@
+# .pre-commit-config.yaml
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+    -   id: trailing-whitespace
+    -   id: end-of-file-fixer
+    -   id: check-yaml
+    -   id: check-toml
+    -   id: check-added-large-files
+    -   id: check-merge-conflict
+    -   id: debug-statements
+
+# Use our linting script for pre-commit checks
+-   repo: local
+    hooks:
+    -   id: lint
+        name: Run linting script
+        entry: ./scripts/lint.sh
+        language: script
+        pass_filenames: false
+        types: [python]
+        description: Runs linting, formatting and type checking
+
+# To ensure poetry.lock is consistent with pyproject.toml
+-   repo: https://github.com/python-poetry/poetry
+    rev: '1.8.2'
+    hooks:
+      - id: poetry-check
+      - id: poetry-lock
+
+# Instructions for use:
+# 1. Install pre-commit: pip install pre-commit
+# 2. Install hooks: pre-commit install
+# Now, hooks will run automatically on `git commit`.
+# To run hooks on all files: pre-commit run --all-files
